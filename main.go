@@ -11,6 +11,7 @@ const l = 100
 // Population container structure.
 type population struct {
 	n         int
+	t         int
 	sols      [][]int
 	fits      []float64
 	fitness   func(v []int) float64
@@ -21,6 +22,6 @@ type population struct {
 func main() {
 	rand.Seed(1)
 
-	p := fillPopulation(400, tightDeceptiveTF, twoPointCrossover, true)
+	p := fillPopulation(100, tightDeceptiveTF, twoPointCrossover, true)
 	geneticAlgorithm(p)
 }

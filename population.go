@@ -12,6 +12,7 @@ import (
 // Initialize empty population structure.
 func initPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) (p population) {
 	p.n = n
+	p.t = 0
 	p.sols = make([][]int, n)
 	p.fits = make([]float64, n)
 	p.fitness = f
@@ -31,6 +32,7 @@ func fillPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2
 		}
 		p.fits[i] = p.fitness(p.sols[i])
 	}
+	p.t = 1
 	return p
 }
 
@@ -102,6 +104,7 @@ func printPopulationStats(p population) {
 		total += p.fits[i]
 	}
 	total = total / float64(p.n)
+	fmt.Printf("Generation %d\n", p.t)
 	fmt.Printf("  Average fitness: %5.1f\n", total)
 	fmt.Printf("  Best fitness:    %5.1f  Worst: %5.1f\n", best, worst)
 }
