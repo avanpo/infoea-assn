@@ -1,6 +1,10 @@
+// Population control logic
+///////////////////////////
+
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"sort"
 )
@@ -22,7 +26,7 @@ func fillPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2
 		for j := range p.sols[i] {
 			p.sols[i][j] = rand.Intn(2)
 		}
-		p.fits[i] = f(p.sols[i])
+		p.fits[i] = p.fitness(p.sols[i])
 	}
 	return p
 }
@@ -53,4 +57,45 @@ func (s population) Swap(i, j int) {
 
 func (s population) Less(i, j int) bool {
 	return s.fits[i] > s.fits[j] //sort high-to-low
+}
+
+// Printing functions
+/////////////////////
+
+func printPopulation(p population) {
+	for i := range p.sols {
+		fmt.Printf("%5.1f  ", p.fits[i])
+		for j := 0; j < 60; j++ {
+			fmt.Printf("%d", p.sols[i][j])
+		}
+		fmt.Printf("...\n")
+	}
+}
+
+func printPopulationShort(p population) {
+	for i := range p.fits {
+		if i > 0 && i % 11 == 0 {
+			fmt.Printf("\n")
+		}
+		fmt.Printf("%5.1f ", p.fits[i])
+	}
+	fmt.Printf("\n")
+}
+
+func printPopulationStats(p population) {
+	best := 0.0
+	worst := 100.0
+	total := 0.0
+	for i := range p.fits {
+		if p.fits[i] > best {
+			best = p.fits[i]
+		}
+		if p.fits[i] < worst {
+			worst = p.fits[i]
+		}
+		total += p.fits[i]
+	}
+	total = total / float64(p.n)
+	fmt.Printf("  Average fitness: %5.1f\n", total)
+	fmt.Printf("  Best fitness:    %5.1f  Worst: %5.1f\n", best, worst)
 }

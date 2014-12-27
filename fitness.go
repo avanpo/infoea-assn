@@ -1,6 +1,9 @@
+// Fitness functions
+////////////////////
+
 package main
 
-/* fitness functions */
+import "math/rand"
 
 func uniformCO(v []int) float64 {
 	f := 0
@@ -36,7 +39,8 @@ func randNonDeceptiveTF(v []int) float64 {
 	return trapFunction(w, 4, 2.5)
 }
 
-/* helper functions */
+// helper functions
+///////////////////
 
 func trapFunction(v []int, k float64, d float64) (f float64) {
 	for i := 0; i < l; i += int(k) {
@@ -48,4 +52,15 @@ func trapFunction(v []int, k float64, d float64) (f float64) {
 		}
 	}
 	return
+}
+
+// returns a new copy, doesn't modify source
+func shuffle(src []int) []int {
+	v := make([]int, len(src))
+	for i := range src {
+		j := rand.Intn(i + 1)
+		v[i] = v[j]
+		v[j] = src[i]
+	}
+	return v
 }

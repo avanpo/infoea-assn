@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 )
 
@@ -14,16 +13,14 @@ type population struct {
 	sols      [][]int
 	fits      []float64
 	fitness   func(v []int) float64
-	crossover func(p1, p2 []int) (o1, o2 []int)
+	crossover func(p1, p2 []int) ([]int, []int)
 	mutation  bool
 }
 
 func main() {
 	rand.Seed(42)
 
-	p := fillPopulation(6, uniformCO, twoPointCrossover, false)
+	p := fillPopulation(200, uniformCO, twoPointCrossover, false)
 
-	fmt.Println(p)
-	sortPopulation(p)
-	fmt.Println(p)
+	geneticAlgorithm(p)
 }
