@@ -73,10 +73,10 @@ func (s population) Less(i, j int) bool {
 func printPopulation(p population) {
 	for i := range p.sols {
 		fmt.Printf("%5.1f  ", p.fits[i])
-		for j := 0; j < 60; j++ {
+		for j := 0; j < l; j++ {
 			fmt.Printf("%d", p.sols[i][j])
 		}
-		fmt.Printf("...\n")
+		fmt.Printf("\n")
 	}
 }
 
@@ -91,8 +91,8 @@ func printPopulationShort(p population) {
 }
 
 func printPopulationStats(p population) {
-	best := 0.0
-	worst := 100.0
+	best := p.fits[0]
+	worst := p.fits[0]
 	total := 0.0
 	for i := range p.fits {
 		if p.fits[i] > best {
@@ -107,4 +107,13 @@ func printPopulationStats(p population) {
 	fmt.Printf("Generation %d\n", p.t)
 	fmt.Printf("  Average fitness: %5.1f\n", total)
 	fmt.Printf("  Best fitness:    %5.1f  Worst: %5.1f\n", best, worst)
+}
+
+func verifyPopulationFitness(p population) bool {
+	for i := range p.sols {
+		if p.fitness(p.sols[i]) != p.fits[i] {
+			return false
+		}
+	}
+	return true
 }

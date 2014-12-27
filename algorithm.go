@@ -3,12 +3,19 @@
 
 package main
 
-import "math/rand"
+import (
+"fmt"
+"math/rand"
+)
 
 // Main algorithm loop. On return, the population is sorted.
-func geneticAlgorithm(p population) {
+func geneticAlgorithm(p population) population {
 	for i := 0; true; i++ {
-		printPopulationStats(p)
+		//printPopulationStats(p)
+		if !verifyPopulationFitness(p) {
+			fmt.Println("FITNESS ERROR")
+			break
+		}
 
 		parents := selectParents(p)
 		offspring := generateOffspring(parents)
@@ -21,6 +28,7 @@ func geneticAlgorithm(p population) {
 
 		shufflePopulation(p)
 	}
+	return p
 }
 
 // Returns sorted new generation, with a stop flag if no offspring

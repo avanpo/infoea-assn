@@ -20,8 +20,11 @@ type population struct {
 }
 
 func main() {
-	rand.Seed(1)
+	rand.Seed(2)
 
-	p := fillPopulation(100, tightDeceptiveTF, twoPointCrossover, true)
-	geneticAlgorithm(p)
+	p := fillPopulation(100, linearCO, twoPointCrossover, true)
+	p = geneticAlgorithm(p)
+
+	printPopulation(p)
+	printPopulationStats(p)
 }
