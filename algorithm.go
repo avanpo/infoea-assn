@@ -50,6 +50,7 @@ func selectNewGeneration(p population, po population) (population, bool) {
 	return newPop, false
 }
 
+// Generates offspring from selected parents.
 func generateOffspring(pp population) population {
 	po := initPopulation(pp.n, pp.fitness, pp.crossover, pp.mutation)
 	for i := 0; i < pp.n; i += 2 {
@@ -64,6 +65,7 @@ func generateOffspring(pp population) population {
 	return po
 }
 
+// Selects parents through tournament selection (s = 2).
 func selectParents(p population) population {
 	pp := initPopulation(p.n, p.fitness, p.crossover, p.mutation)
 	for i := 0; i < p.n; i += 2 {
@@ -93,11 +95,10 @@ func selectParents(p population) population {
 
 func mutate(v []int) {
 	for {
+		i := rand.Intn(len(v))
+		v[i] = 1 - v[i]
 		if rand.Intn(2) == 0 {
 			break
-		} else {
-			i := rand.Intn(len(v))
-			v[i] = 1 - v[i]
 		}
 	}
 }

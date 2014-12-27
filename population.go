@@ -9,6 +9,7 @@ import (
 	"sort"
 )
 
+// Initialize empty population structure.
 func initPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) (p population) {
 	p.n = n
 	p.sols = make([][]int, n)
@@ -19,6 +20,8 @@ func initPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2
 	return
 }
 
+// Initialize and fill population structure with randomly
+// generated solutions.
 func fillPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) population {
 	p := initPopulation(n, f, c, m)
 	for i := range p.sols {
@@ -31,6 +34,8 @@ func fillPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2
 	return p
 }
 
+// Randomizes the population order using the Fisher-Yates
+// shuffle.
 func shufflePopulation(p population) {
 	for i := range p.sols {
 		j := rand.Intn(i + 1)
@@ -39,6 +44,7 @@ func shufflePopulation(p population) {
 	}
 }
 
+// Sorts the population according to fitness.
 func sortPopulation(p population) {
 	sort.Sort(p)
 }
@@ -59,8 +65,8 @@ func (s population) Less(i, j int) bool {
 	return s.fits[i] > s.fits[j] //sort high-to-low
 }
 
-// Printing functions
-/////////////////////
+// Printing/Debugging functions
+///////////////////////////////
 
 func printPopulation(p population) {
 	for i := range p.sols {

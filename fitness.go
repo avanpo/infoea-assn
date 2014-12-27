@@ -1,10 +1,11 @@
-// Fitness functions
+// Fitness Functions
 ////////////////////
 
 package main
 
 import "math/rand"
 
+// Uniformly scaled counting ones function.
 func uniformCO(v []int) float64 {
 	f := 0
 	for _, x := range v {
@@ -13,6 +14,7 @@ func uniformCO(v []int) float64 {
 	return float64(f)
 }
 
+// Linearly scaled counting ones function.
 func linearCO(v []int) float64 {
 	f := 0
 	for i, x := range v {
@@ -21,25 +23,29 @@ func linearCO(v []int) float64 {
 	return float64(f)
 }
 
+// Tightly linked deceptive trap function.
 func tightDeceptiveTF(v []int) float64 {
 	return trapFunction(v, 4, 1)
 }
 
+// Randomly linked deceptive trap function.
 func randDeceptiveTF(v []int) float64 {
 	w := shuffle(v)
 	return trapFunction(w, 4, 1)
 }
 
+// Tightly linked non-deceptive trap function.
 func tightNonDeceptiveTF(v []int) float64 {
 	return trapFunction(v, 4, 2.5)
 }
 
+// Randomly linked non-deceptive trap function.
 func randNonDeceptiveTF(v []int) float64 {
 	w := shuffle(v)
 	return trapFunction(w, 4, 2.5)
 }
 
-// helper functions
+// Helper functions
 ///////////////////
 
 func trapFunction(v []int, k float64, d float64) (f float64) {
@@ -54,7 +60,6 @@ func trapFunction(v []int, k float64, d float64) (f float64) {
 	return
 }
 
-// returns a new copy, doesn't modify source
 func shuffle(src []int) []int {
 	v := make([]int, len(src))
 	for i := range src {
@@ -62,5 +67,5 @@ func shuffle(src []int) []int {
 		v[i] = v[j]
 		v[j] = src[i]
 	}
-	return v
+	return v // returns new copy, doesn't modify src
 }

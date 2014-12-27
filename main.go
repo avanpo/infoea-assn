@@ -1,3 +1,8 @@
+// Evolutionary Algorithms Assignment 1
+///////////////////////////////////////
+// Author: Alex van Poppelen
+///////////////////////////////////////
+
 package main
 
 import (
@@ -18,9 +23,8 @@ type population struct {
 }
 
 func main() {
-	rand.Seed(42)
+	rand.Seed(1)
 
-	p := fillPopulation(200, uniformCO, twoPointCrossover, false)
-
+	p := fillPopulation(400, tightDeceptiveTF, twoPointCrossover, true)
 	geneticAlgorithm(p)
 }
