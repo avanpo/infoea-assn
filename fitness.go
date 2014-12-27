@@ -5,7 +5,8 @@ package main
 
 import "math/rand"
 
-// Randomly linked bit ordering
+// Randomly linked bit ordering. Use initRandomLink() to
+// initialize.
 var randomLink []int
 
 // Uniformly scaled counting ones function.
@@ -73,9 +74,8 @@ func initRandomLink() {
 func shuffle(src []int) []int {
 	v := make([]int, len(src))
 	for i := range src {
-		j := rand.Intn(i + 1)
-		v[i] = v[j]
-		v[j] = src[i]
+		v[i] = v[randomLink[i]]
+		v[randomLink[i]] = src[i]
 	}
 	return v // returns new copy, doesn't modify src
 }
