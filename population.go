@@ -9,6 +9,17 @@ import (
 	"sort"
 )
 
+// Population container structure.
+type population struct {
+	n         int
+	t         int
+	sols      [][]int
+	fits      []float64
+	fitness   func(v []int) float64
+	crossover func(p1, p2 []int) ([]int, []int)
+	mutation  bool
+}
+
 // Initialize empty population structure.
 func initPopulation(n int, f func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) (p population) {
 	p.n = n
@@ -49,6 +60,16 @@ func shufflePopulation(p population) {
 // Sorts the population according to fitness.
 func sortPopulation(p population) {
 	sort.Sort(p)
+}
+
+// Checks whether optimal solution exists in sorted population.
+func containsOptimalSol(p population) bool {
+	for i := range p.sols[0] {
+		if p.sols[0][i] == 0 {
+			return false
+		}
+	}
+	return true
 }
 
 // Implementation of sort.Interface
