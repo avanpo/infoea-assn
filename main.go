@@ -23,9 +23,9 @@ func main() {
 	rand.Seed(1)
 	initRandomLink()
 
-	p := fillPopulation(20, tightDeceptiveTF, twoPointCrossover, true)
+	p := fillPopulation(400, randNonDeceptiveTF, twoPointCrossover, true)
 	p = geneticAlgorithm(p)
 
-	printPopulation(p)
+	//printPopulation(p)
 	printPopulationStats(p)
 }
