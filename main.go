@@ -1,18 +1,14 @@
 // Evolutionary Algorithms Assignment 1
-///////////////////////////////////////
 // Author: Alex van Poppelen
 ///////////////////////////////////////
 
 package main
 
-import (
-	"math/rand"
-)
+import "math/rand"
 
-const (
-	l = 100
-)
+const l = 100
 
+// Population container structure.
 type population struct {
 	n         int
 	sols      [][]int
