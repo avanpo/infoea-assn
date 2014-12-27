@@ -5,6 +5,9 @@ package main
 
 import "math/rand"
 
+// Randomly linked bit ordering
+var randomLink []int
+
 // Uniformly scaled counting ones function.
 func uniformCO(v []int) float64 {
 	f := 0
@@ -58,6 +61,13 @@ func trapFunction(v []int, k float64, d float64) (f float64) {
 		}
 	}
 	return
+}
+
+func initRandomLink() {
+	randomLink = make([]int, l)
+	for i := range randomLink {
+		randomLink[i] = rand.Intn(i + 1)
+	}
 }
 
 func shuffle(src []int) []int {
