@@ -18,7 +18,7 @@ func uniformCO(v []int) float64 {
 func linearCO(v []int) float64 {
 	f := 0
 	for i, x := range v {
-		f += i * x
+		f += (i + 1) * x
 	}
 	return float64(f)
 }
