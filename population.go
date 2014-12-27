@@ -72,7 +72,7 @@ func (s population) Less(i, j int) bool {
 
 func printPopulation(p population) {
 	for i := range p.sols {
-		fmt.Printf("%5.1f  ", p.fits[i])
+		fmt.Printf("%6.1f  ", p.fits[i])
 		for j := 0; j < l; j++ {
 			fmt.Printf("%d", p.sols[i][j])
 		}
@@ -85,7 +85,7 @@ func printPopulationShort(p population) {
 		if i > 0 && i % 11 == 0 {
 			fmt.Printf("\n")
 		}
-		fmt.Printf("%5.1f ", p.fits[i])
+		fmt.Printf("%6.1f ", p.fits[i])
 	}
 	fmt.Printf("\n")
 }
