@@ -3,7 +3,10 @@
 
 package main
 
-import "os"
+import (
+	"os"
+	"fmt"
+)
 
 // Fitness functions used in experiments
 var exp1FitFuncs = []func(v []int) float64{
@@ -18,7 +21,7 @@ var exp23FitFuncs = []func(v []int) float64{
 // Runs experiment given a slice of fitness functions, a crossover
 // function, and whether or not mutation will be allowed.
 func experiment(fitFuncs []func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) [][]int {
-	data := make([][]int, len(fitFuncs) + 1)
+	data := make([][]int, len(fitFuncs))
 	for i, f := range fitFuncs {
 		data[i] = make([]int, 1281)
 		prev, n := 5, 10
@@ -49,7 +52,7 @@ func experiment(fitFuncs []func(v []int) float64, c func(p1, p2 []int) (o1, o2 [
 }
 
 func writeData(exp int, data [][]int) {
-	file, err := os.Create("data" + string(exp) + ".dat")
+	file, err := os.Create(fmt.Sprintf("data%d.dat", exp))
 	if err != nil {
 		panic(err)
 	}
@@ -57,12 +60,12 @@ func writeData(exp int, data [][]int) {
 	defer file.Close()
 
 	for n := 10; n <= 1280; n += 10 {
-		file.WriteString(string(n))
-		for f := 1; f < len(data); f++ {
+		file.WriteString(fmt.Sprintf("%d", n))
+		for f := 0; f < len(data); f++ {
 			if data[f][n] == 0 {
 				file.WriteString(" ?")
 			} else {
-				file.WriteString(" " + string(data[f][n] - 1))
+				file.WriteString(fmt.Sprintf(" %d", data[f][n] - 1))
 			}
 		}
 		file.WriteString("\n")
