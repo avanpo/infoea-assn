@@ -6,8 +6,11 @@ package main
 import "math/rand"
 
 // Main algorithm loop. On return, the population is sorted.
-func geneticAlgorithm(p population) population {
+func geneticAlgorithm(p population, verbose bool) population {
 	for i := 0; true; i++ {
+		if verbose {
+			printPopulation(p)
+		}
 		parents := selectParents(p)
 		offspring := generateOffspring(parents)
 
@@ -128,12 +131,12 @@ func uniformCrossover(p1, p2 []int) ([]int, []int) {
 	o1 := make([]int, len(p1))
 	o2 := make([]int, len(p1))
 	for i := range p1 {
-		if rand.Intn(2) == 0 {
-			o1[i] = p1[i]
-			o2[i] = p2[i]
-		} else {
+		if p1[i] != p2[i] && rand.Intn(2) == 0 {
 			o1[i] = p2[i]
 			o2[i] = p1[i]
+		} else {
+			o1[i] = p1[i]
+			o2[i] = p2[i]
 		}
 	}
 	return o1, o2
