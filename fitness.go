@@ -54,7 +54,7 @@ func randNonDeceptiveTF(v []int) float64 {
 
 func trapFunction(v []int, k float64, d float64) (f float64) {
 	for i := 0; i < l; i += int(k) {
-		co := float64(uniformCO(v[i : i+int(k)]))
+		co := uniformCO(v[i : i+int(k)])
 		if co == k {
 			f += k
 		} else {
