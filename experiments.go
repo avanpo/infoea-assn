@@ -3,7 +3,7 @@
 
 package main
 
-import "fmt"
+import "os"
 
 // Fitness functions used in experiments
 var exp1FitFuncs = []func(v []int) float64{
@@ -17,8 +17,10 @@ var exp23FitFuncs = []func(v []int) float64{
 
 // Runs experiment given a slice of fitness functions, a crossover
 // function, and whether or not mutation will be allowed.
-func experiment(fitFuncs []func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) {
-	for _, f := range fitFuncs {
+func experiment(fitFuncs []func(v []int) float64, c func(p1, p2 []int) (o1, o2 []int), m bool) [][]int {
+	data := make([][]int, len(fitFuncs) + 1)
+	for i, f := range fitFuncs {
+		data[i] = make([]int, 1281)
 		prev, n := 5, 10
 		for {
 			var p population
@@ -27,13 +29,14 @@ func experiment(fitFuncs []func(v []int) float64, c func(p1, p2 []int) (o1, o2 [
 			//run genetic algorithm 30 times
 			for j := 0; j < 30; j++ {
 				p = fillPopulation(n, f, c, m)
-				p = geneticAlgorithm(p)
+				p = geneticAlgorithm(p, false)
 				if containsOptimalSol(p) {
 					success++
 				}
 			}
 			//output results
-			fmt.Printf("N=%-4d %2d/%d\n", n, success, 30)
+			//note: offset by 1 to distinguish from missing vals
+			data[i][n] = success + 1
 
 			//update parameters or break
 			n, prev = bisectionSearch(success, n, prev)
@@ -42,6 +45,29 @@ func experiment(fitFuncs []func(v []int) float64, c func(p1, p2 []int) (o1, o2 [
 			}
 		}
 	}
+	return data
+}
+
+func writeData(exp int, data [][]int) {
+	file, err := os.Create("data" + string(exp) + ".dat")
+	if err != nil {
+		panic(err)
+	}
+
+	defer file.Close()
+
+	for n := 10; n <= 1280; n += 10 {
+		file.WriteString(string(n))
+		for f := 1; f < len(data); f++ {
+			if data[f][n] == 0 {
+				file.WriteString(" ?")
+			} else {
+				file.WriteString(" " + string(data[f][n] - 1))
+			}
+		}
+		file.WriteString("\n")
+	}
+	file.Sync()
 }
 
 // Utils
