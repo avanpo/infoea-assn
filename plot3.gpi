@@ -2,7 +2,7 @@
 
 # terminal and png output
 set terminal svg size 680,440 fname "Monospace" fsize "10" rounded dashed
-set output "plot1.svg"
+set output "plot3.svg"
 
 # remove border on top and right and set color to gray
 set style line 11 lc rgb "#808080" lt 1
@@ -21,7 +21,7 @@ set style line 5 lc rgb "#2222bb" pt 5 ps 1 lt 1 lw 2 # dark blue
 set style line 6 lc rgb "#cc0099" pt 6 ps 1 lt 1 lw 2 # purple
 
 # labeling
-set title "Experiment 1: Success vs Population Size" font "Monospace Bold,10"
+set title "Experiment 3: Success vs Population Size" font "Monospace Bold,10"
 set xlabel "Population Size"
 set ylabel "Successes out of 30"
 
@@ -30,10 +30,8 @@ set key bottom right
 # missing data points
 set datafile missing "?"
 
-plot "data1.dat" using 1:2 title "Uniform CO" w lp ls 1, \
+plot "data3.dat" using 1:2 title "Uniform CO" w lp ls 1, \
      ""          using 1:3 title "Linear CO" w lp ls 2, \
-     ""          using 1:4 title "Tightly Linked Deceptive TF" w lp ls 3, \
-     ""          using 1:5 title "Randomly Linked Deceptive TF" w lp ls 5, \
-     ""          using 1:6 title "Tightly Linked Non-Deceptive TF" w lp ls 4, \
-     ""          using 1:7 title "Randomly Linked Non-Deceptive TF" w lp ls 6
+     ""          using 1:4 title "Deceptive TF" w lp ls 3, \
+     ""          using 1:5 title "Non-Deceptive TF" w lp ls 4, \
 #
