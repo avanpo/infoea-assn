@@ -65,6 +65,7 @@ func writeData(exp int, data [][]int) {
 			if data[f][n] == 0 {
 				file.WriteString(" ?")
 			} else {
+				//note: remove offset by 1 to return data to actual val
 				file.WriteString(fmt.Sprintf(" %d", data[f][n] - 1))
 			}
 		}

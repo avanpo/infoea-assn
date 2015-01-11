@@ -1,5 +1,7 @@
 // Fitness Functions
 ////////////////////
+// Note: initRandomLink() must be called before using any
+// randomly linked trap functions.
 
 package main
 
