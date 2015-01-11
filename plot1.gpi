@@ -1,8 +1,8 @@
 #!/usr/bin/gnuplot
 
 # terminal and png output
-set terminal svg size 680,440 fname "Monospace" fsize "10" rounded dashed
-set output "plot1.svg"
+set terminal pngcairo size 600,400 enhanced font "Monospace,10"
+set output "plot1.png"
 
 # remove border on top and right and set color to gray
 set style line 11 lc rgb "#808080" lt 1
@@ -25,7 +25,7 @@ set title "Experiment 1: Success vs Population Size" font "Monospace Bold,10"
 set xlabel "Population Size"
 set ylabel "Successes out of 30"
 
-set key bottom right
+set key center right
 
 # missing data points
 set datafile missing "?"

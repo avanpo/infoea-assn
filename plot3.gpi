@@ -1,8 +1,8 @@
 #!/usr/bin/gnuplot
 
 # terminal and png output
-set terminal svg size 680,440 fname "Monospace" fsize "10" rounded dashed
-set output "plot3.svg"
+set terminal pngcairo size 600,400 enhanced font "Monospace,10"
+set output "plot3.png"
 
 # remove border on top and right and set color to gray
 set style line 11 lc rgb "#808080" lt 1
