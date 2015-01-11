@@ -25,3 +25,7 @@ _testmain.go
 
 # Executable
 infoea-assn1
+
+# Temporary and data files
+*.swp
+*.dat
