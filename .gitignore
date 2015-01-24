@@ -24,7 +24,7 @@ _testmain.go
 *.prof
 
 # Executable
-infoea-assn1
+infoea-assn
 
 # Temporary and data files
 *.swp

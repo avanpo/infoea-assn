@@ -30,7 +30,7 @@ set key center right
 # missing data points
 set datafile missing "?"
 
-plot "data1.dat" using 1:2 title "Uniform CO" w lp ls 1, \
+plot "../data1.dat" using 1:2 title "Uniform CO" w lp ls 1, \
      ""          using 1:3 title "Linear CO" w lp ls 2, \
      ""          using 1:4 title "Tightly Linked Deceptive TF" w lp ls 3, \
      ""          using 1:5 title "Randomly Linked Deceptive TF" w lp ls 5, \
